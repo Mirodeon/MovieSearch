@@ -6,10 +6,102 @@
     android:layout_height="match_parent"
     tools:context=".fragment.DetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/imgBackMovieDetails"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="256dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/image_placeholder" />
+
+    <ImageView
+        android:id="@+id/imgPosterMovieDetails"
+        android:layout_width="108dp"
+        android:layout_height="192dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="156dp"
+        android:background="@drawable/rounded_background_without_padding"
+        android:clipToOutline="true"
+        android:backgroundTint="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/image_placeholder" />
+
+    <TextView
+        android:id="@+id/txtVoteMovieDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="228dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_background_card"
+        android:backgroundTint="@color/black"
+        android:padding="8dp"
+        android:text="@string/no_content"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTitleMovieDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="-36dp"
+        android:text="@string/no_content"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/imgPosterMovieDetails"
+        app:layout_constraintTop_toBottomOf="@id/imgPosterMovieDetails" />
+
+    <TextView
+        android:id="@+id/txtTitleSynopsisMovieDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/title_synopsis"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgPosterMovieDetails" />
+
+    <ScrollView
+        android:id="@+id/scrollDescription"
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitleSynopsisMovieDetails">
+
+        <TextView
+            android:id="@+id/txtDescriptionMovieDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum"
+            android:textSize="11sp" />
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/txtTitleSimilarMovieDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/similar_titles"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollDescription" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/containerRecyclerSearchedMovie"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitleSimilarMovieDetails" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
