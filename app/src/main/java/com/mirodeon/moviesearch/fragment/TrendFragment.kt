@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mirodeon.moviesearch.R
 import com.mirodeon.moviesearch.adapter.SearchMovieAdapter
+import com.mirodeon.moviesearch.adapter.TrendMovieAdapter
 import com.mirodeon.moviesearch.databinding.FragmentContentSearchBinding
 import com.mirodeon.moviesearch.databinding.FragmentTrendBinding
 import com.mirodeon.moviesearch.network.dto.Movie
@@ -46,7 +47,7 @@ class TrendFragment : Fragment() {
     private fun setupRecyclerView() {
         recyclerView = binding?.containerRecyclerTrendMovie
         recyclerView?.layoutManager = GridLayoutManager(activity, 3)
-        val itemAdapter = SearchMovieAdapter { goToDetails(it) }
+        val itemAdapter = TrendMovieAdapter { goToDetails(it) }
         recyclerView?.adapter = itemAdapter
         viewModel.getTrendMovie { movies ->
             itemAdapter.submitList(movies)

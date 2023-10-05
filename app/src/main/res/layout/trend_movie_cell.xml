@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="2dp"
+    android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="2dp">
 
     <ImageView
@@ -29,10 +29,10 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_background_card"
         android:backgroundTint="@color/black"
-        android:padding="2dp"
+        android:padding="6dp"
         android:text="@string/no_content"
         android:textColor="@color/white"
-        android:textSize="11sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintRight_toRightOf="@id/imgMovieTrend"
         app:layout_constraintTop_toTopOf="@id/imgMovieTrend" />
