@@ -14,15 +14,15 @@ data class Movie(
     @SerializedName("id")
     var id: Int,
     @SerializedName("original_title")
-    var title: String,
+    var title: String?,
     @SerializedName("poster_path")
     var poster: String?,
     @SerializedName("backdrop_path")
     var backdrop: String?,
     @SerializedName("release_date")
-    var release: String,
+    var release: String?,
     @SerializedName("vote_average")
-    var vote: Float,
+    var vote: Float?,
     @SerializedName("overview")
-    var overview: String
+    var overview: String?
 ) : Parcelable

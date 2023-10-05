@@ -56,7 +56,7 @@ class TrendFragment : Fragment() {
 
     private fun goToDetails(movie: Movie) {
         val directions =
-            SearchFragmentDirections.actionSearchFragmentToDetailsFragment(movie)
+            TrendFragmentDirections.actionTrendFragmentToDetailsFragment(movie)
         findNavController().navigate(directions)
     }
 

@@ -13,23 +13,33 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/image_placeholder" />
 
-    <ImageView
-        android:id="@+id/imgPosterMovieDetails"
-        android:layout_width="108dp"
-        android:layout_height="192dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerImgPosterMovieDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="156dp"
         android:background="@drawable/rounded_background_without_padding"
-        android:backgroundTint="@color/black"
-        android:clipToOutline="true"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/image_placeholder" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgPosterMovieDetails"
+            android:layout_width="108dp"
+            android:layout_height="192dp"
+            android:background="@drawable/rounded_background_without_padding"
+            android:backgroundTint="@color/black"
+            android:clipToOutline="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/image_placeholder" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/txtVoteMovieDetails"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="228dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_background_card"
@@ -51,8 +61,8 @@
         android:text="@string/no_content"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/imgPosterMovieDetails"
-        app:layout_constraintTop_toBottomOf="@id/imgPosterMovieDetails" />
+        app:layout_constraintLeft_toRightOf="@id/containerImgPosterMovieDetails"
+        app:layout_constraintTop_toBottomOf="@id/containerImgPosterMovieDetails" />
 
     <ScrollView
         android:id="@+id/scrollDescription"
@@ -62,7 +72,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgPosterMovieDetails">
+        app:layout_constraintTop_toBottomOf="@id/containerImgPosterMovieDetails">
 
         <LinearLayout
             android:layout_width="match_parent"

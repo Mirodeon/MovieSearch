@@ -68,7 +68,7 @@ class SearchMovieAdapter(
         fun bind(movie: Movie) {
             setupImage(UrlApi.imageMovieApi + movie.poster)
             binding.txtTitleMovieSearch.text = movie.title
-            binding.txtReleaseMovieSearch.text = setDateTxt(movie.release)
+            binding.txtReleaseMovieSearch.text = movie.release?.let { setDateTxt(it) }
             binding.txtVoteSearchMovie.text = movie.vote.toString()
         }
 
