@@ -26,10 +26,6 @@ class MainActivity : AppCompatActivity() {
         setNavigation()
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     override fun onDestroy() {
         binding = null
         super.onDestroy()

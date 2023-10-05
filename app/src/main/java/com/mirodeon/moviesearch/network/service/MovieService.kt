@@ -1,5 +1,6 @@
 package com.mirodeon.moviesearch.network.service
 
+import com.mirodeon.moviesearch.network.dto.Results
 import com.mirodeon.moviesearch.network.utils.UrlApi
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,30 +14,30 @@ interface MovieService {
     suspend fun searchMovie(
         @Query("query", encoded = true) query: String,
         @Query("api_key", encoded = true) apiKey: String
-    ): Response<Any>
+    ): Response<Results>
 
     @Headers("Content-type: application/json")
     @GET("movie/{movie_id}/similar")
     suspend fun similarMovie(
         @Path("movie_id") id: String,
         @Query("api_key", encoded = true) apiKey: String
-    ): Response<Any>
+    ): Response<Results>
 
     @Headers("Content-type: application/json")
     @GET("trending/all/day")
     suspend fun trendMovie(
         @Query("api_key", encoded = true) apiKey: String
-    ): Response<Any>
+    ): Response<Results>
 
 }
 
 class MovieServiceImpl : BaseService(UrlApi.movieApi) {
-    suspend fun getSearchMovie(query: String): Response<Any> =
-        getRetrofit().create(MovieService::class.java).searchMovie(query, "")
+    suspend fun getSearchMovie(query: String): Response<Results> =
+        getRetrofit().create(MovieService::class.java).searchMovie(query, UrlApi.apiKey)
 
-    suspend fun getSimilarMovie(id: String): Response<Any> =
-        getRetrofit().create(MovieService::class.java).similarMovie(id, "")
+    suspend fun getSimilarMovie(id: String): Response<Results> =
+        getRetrofit().create(MovieService::class.java).similarMovie(id, UrlApi.apiKey)
 
-    suspend fun getTrendMovie(): Response<Any> =
-        getRetrofit().create(MovieService::class.java).trendMovie("")
+    suspend fun getTrendMovie(): Response<Results> =
+        getRetrofit().create(MovieService::class.java).trendMovie(UrlApi.apiKey)
 }

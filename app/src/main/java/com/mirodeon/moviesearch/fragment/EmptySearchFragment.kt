@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mirodeon.moviesearch.R
+import com.mirodeon.moviesearch.databinding.FragmentEmptySearchBinding
 
 class EmptySearchFragment : Fragment() {
-
+    private var binding: FragmentEmptySearchBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -17,7 +18,12 @@ class EmptySearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_empty_search, container, false)
+        binding = FragmentEmptySearchBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
+
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
     }
 }
