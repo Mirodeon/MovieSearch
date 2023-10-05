@@ -15,6 +15,7 @@ import com.mirodeon.moviesearch.R
 import com.mirodeon.moviesearch.adapter.SearchMovieAdapter
 import com.mirodeon.moviesearch.adapter.SimilarMovieAdapter
 import com.mirodeon.moviesearch.databinding.FragmentDetailsBinding
+import com.mirodeon.moviesearch.network.dto.Movie
 import com.mirodeon.moviesearch.network.utils.UrlApi
 import com.mirodeon.moviesearch.viewModel.MovieViewModel
 import com.mirodeon.moviesearch.viewModel.MovieViewModelFactory
@@ -87,11 +88,17 @@ class DetailsFragment : Fragment() {
         recyclerView?.layoutManager = LinearLayoutManager(activity)
         (recyclerView?.layoutManager as? LinearLayoutManager)?.orientation =
             LinearLayoutManager.HORIZONTAL
-        val itemAdapter = SimilarMovieAdapter { }
+        val itemAdapter = SimilarMovieAdapter { goToDetails(it) }
         recyclerView?.adapter = itemAdapter
         viewModel.getSimilarMovie(args.movie.id.toString()) { movies ->
             itemAdapter.submitList(movies)
         }
+    }
+
+    private fun goToDetails(movie: Movie) {
+        val directions =
+            DetailsFragmentDirections.actionDetailsFragmentSelf(movie)
+        findNavController().navigate(directions)
     }
 
 }
