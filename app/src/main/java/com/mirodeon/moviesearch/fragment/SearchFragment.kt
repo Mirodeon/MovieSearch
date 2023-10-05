@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.coroutineScope
 import com.mirodeon.moviesearch.R
@@ -44,6 +46,11 @@ class SearchFragment : Fragment() {
 
     private fun setInputSearch() {
         binding?.searchInputLayout?.setEndIconOnClickListener {
+            jobSearch?.cancel()
+            showContent()
+        }
+        binding?.searchEditText?.onSubmit {
+            jobSearch?.cancel()
             showContent()
         }
     }
@@ -64,6 +71,15 @@ class SearchFragment : Fragment() {
                 delay(2000)
                 showContent()
             }
+        }
+    }
+
+    private fun EditText.onSubmit(handler: () -> Unit) {
+        setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                handler()
+            }
+            true
         }
     }
 
