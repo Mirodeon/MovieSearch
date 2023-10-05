@@ -84,9 +84,14 @@ class SearchMovieAdapter(
 
         @RequiresApi(Build.VERSION_CODES.O)
         private fun setDateTxt(dateString: String): String? {
-            val localDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-            val dtf = DateTimeFormatter.ofPattern("MMM dd, uuuu", Locale.ENGLISH)
-            return dtf.format(localDate)
+            return if (dateString.isNotEmpty()) {
+                val localDate =
+                    LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                val dtf = DateTimeFormatter.ofPattern("MMM dd, uuuu", Locale.ENGLISH)
+                dtf.format(localDate)
+            } else {
+                null
+            }
         }
 
     }
