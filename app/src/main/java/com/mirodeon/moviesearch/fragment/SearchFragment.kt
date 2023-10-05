@@ -5,12 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.coroutineScope
 import com.mirodeon.moviesearch.R
 import com.mirodeon.moviesearch.activity.MainActivity
 import com.mirodeon.moviesearch.databinding.FragmentSearchBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
     private var binding: FragmentSearchBinding? = null
+    private var jobSearch: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +29,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setInputSearch()
+        setAfterTextChanged()
     }
 
     override fun onResume() {
@@ -47,6 +54,16 @@ class SearchFragment : Fragment() {
             (activity as MainActivity).show(ContentSearchFragment(input), R.id.containerContent)
         } else {
             (activity as MainActivity).show(EmptySearchFragment(), R.id.containerContent)
+        }
+    }
+
+    private fun setAfterTextChanged() {
+        binding?.searchEditText?.doAfterTextChanged {
+            jobSearch?.cancel()
+            jobSearch = lifecycle.coroutineScope.launch {
+                delay(2000)
+                showContent()
+            }
         }
     }
 
