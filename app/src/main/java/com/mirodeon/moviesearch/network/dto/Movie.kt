@@ -16,9 +16,9 @@ data class Movie(
     @SerializedName("original_title")
     var title: String,
     @SerializedName("poster_path")
-    var poster: String,
+    var poster: String?,
     @SerializedName("backdrop_path")
-    var backdrop: String,
+    var backdrop: String?,
     @SerializedName("release_date")
     var release: String,
     @SerializedName("vote_average")

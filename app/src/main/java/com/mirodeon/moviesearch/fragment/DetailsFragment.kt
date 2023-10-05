@@ -7,9 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mirodeon.moviesearch.R
+import com.mirodeon.moviesearch.adapter.SearchMovieAdapter
+import com.mirodeon.moviesearch.adapter.SimilarMovieAdapter
 import com.mirodeon.moviesearch.databinding.FragmentDetailsBinding
 import com.mirodeon.moviesearch.network.utils.UrlApi
 import com.mirodeon.moviesearch.viewModel.MovieViewModel
@@ -24,11 +28,6 @@ class DetailsFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private val args: DetailsFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,8 +38,9 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupBackArrow()
         setupContent()
-        //setupRecyclerView()
+        setupRecyclerView()
     }
 
     override fun onDestroy() {
@@ -48,14 +48,22 @@ class DetailsFragment : Fragment() {
         super.onDestroy()
     }
 
+    private fun setupBackArrow() {
+        binding?.backArrowDetails?.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
     private fun setupContent() {
         binding?.imgBackMovieDetails?.let {
-            setupImage(UrlApi.imageMovieApi + args.movie.backdrop,
+            setupImage(
+                UrlApi.imageMovieApi + args.movie.backdrop,
                 it
             )
         }
         binding?.imgPosterMovieDetails?.let {
-            setupImage(UrlApi.imageMovieApi + args.movie.poster,
+            setupImage(
+                UrlApi.imageMovieApi + args.movie.poster,
                 it
             )
         }
@@ -72,6 +80,18 @@ class DetailsFragment : Fragment() {
             .fit()
             .centerCrop()
             .into(imageView)
+    }
+
+    private fun setupRecyclerView() {
+        recyclerView = binding?.containerRecyclerSimilarMovie
+        recyclerView?.layoutManager = LinearLayoutManager(activity)
+        (recyclerView?.layoutManager as? LinearLayoutManager)?.orientation =
+            LinearLayoutManager.HORIZONTAL
+        val itemAdapter = SimilarMovieAdapter { }
+        recyclerView?.adapter = itemAdapter
+        viewModel.getSimilarMovie(args.movie.id.toString()) { movies ->
+            itemAdapter.submitList(movies)
+        }
     }
 
 }
